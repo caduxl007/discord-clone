@@ -27,5 +27,9 @@
     "tailwindcss": "3.3.3",
     "tailwindcss-animate": "^1.0.6",
     "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.3"
   }
 }
