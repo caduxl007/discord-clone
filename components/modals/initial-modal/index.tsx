@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 import {
   Dialog,
   DialogContent,
@@ -22,18 +20,12 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { useFormInitialModal } from './hooks/use-form-initial-modal'
 import { FileUpload } from '@/components/file-upload'
+import { useIsMounted } from '@/hooks/use-is-mounted'
 
 export function InitialModal() {
-  const [isMounted, setIsMounted] = useState(false)
   const { form, isLoading, onSubmit } = useFormInitialModal()
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted) {
-    return null
-  }
+  useIsMounted()
 
   return (
     <Dialog open>
