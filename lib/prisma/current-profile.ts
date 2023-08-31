@@ -5,7 +5,9 @@ export async function currentProfile() {
   const { userId } = auth()
 
   if (!userId) {
-    return null
+    return {
+      profile: null,
+    }
   }
 
   const profile = await db.profile.findUnique({
