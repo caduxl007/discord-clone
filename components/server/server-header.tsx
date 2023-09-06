@@ -60,7 +60,10 @@ export function ServerHeader({ server, role }: ServerHeaderProps) {
               <Settings className="h-4 w-4 ml-auto" />
             </DropdownMenuItem>
 
-            <DropdownMenuItem className="px-3 p-y2 text-sm cursor-pointer">
+            <DropdownMenuItem
+              onClick={() => onOpen('members', { server })}
+              className="px-3 p-y2 text-sm cursor-pointer"
+            >
               Gerenciar membros
               <UserPlus className="h-4 w-4 ml-auto" />
             </DropdownMenuItem>
