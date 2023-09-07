@@ -2,6 +2,31 @@ import { currentProfile } from '@/lib/prisma/current-profile'
 import { db } from '@/lib/prisma/db'
 import { NextResponse } from 'next/server'
 
+export async function DELETE(
+  req: Request,
+  { params }: { params: { serverId: string } },
+) {
+  try {
+    const { profile } = await currentProfile()
+
+    if (!profile) {
+      return new NextResponse('Unauthorized', { status: 401 })
+    }
+
+    await db.server.delete({
+      where: {
+        id: params.serverId,
+        profileId: profile.id,
+      },
+    })
+
+    return NextResponse.json({})
+  } catch (e) {
+    console.log('[DELETE_SERVER_ID]', e)
+    return new NextResponse('Internal Server Error', { status: 500 })
+  }
+}
+
 export async function PATCH(
   req: Request,
   { params }: { params: { serverId: string } },
