@@ -3,6 +3,8 @@ import { redirect } from 'next/navigation'
 import { currentProfile } from '@/lib/prisma/current-profile'
 import { db } from '@/lib/prisma/db'
 import { ChatHeader } from '@/components/chat/chat-header'
+import { ChatInput } from '@/components/chat/chat-input'
+import { ChatMessages } from '@/components/chat/chat-messages'
 
 interface ChannelIdPageProps {
   params: {
@@ -41,6 +43,31 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
         name={channel.name}
         serverId={channel.serverId}
         type="channel"
+      />
+
+      <ChatMessages
+        member={member}
+        name={channel.name}
+        chatId={channel.id}
+        type="channel"
+        apiUrl="/api/messages"
+        socketUrl="/api/socket/messages"
+        socketQuery={{
+          channelId: channel.id,
+          serverId: channel.serverId,
+        }}
+        paramKey="channelId"
+        paramValue={channel.id}
+      />
+
+      <ChatInput
+        name={channel.name}
+        type="channel"
+        apiUrl="/api/socket/messages"
+        query={{
+          channelId: channel.id,
+          serverId: channel.serverId,
+        }}
       />
     </div>
   )
